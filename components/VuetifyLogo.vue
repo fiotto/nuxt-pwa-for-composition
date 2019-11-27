@@ -6,6 +6,12 @@
   />
 </template>
 
+<script lang="ts">
+import { createComponent } from '@vue/composition-api'
+
+export default createComponent({})
+</script>
+
 <style>
 .VuetifyLogo {
   width: 180px;

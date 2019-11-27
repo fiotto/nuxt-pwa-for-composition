@@ -12,8 +12,10 @@
   </v-app>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { createComponent, ref } from '@vue/composition-api'
+
+export default createComponent({
   layout: 'empty',
   props: {
     error: {
@@ -23,18 +25,22 @@ export default {
   },
   head() {
     const title =
-      this.error.statusCode === 404 ? this.pageNotFound : this.otherError
+      (this as any).error.statusCode === 404
+        ? (this as any).pageNotFound
+        : (this as any).otherError
     return {
       title
     }
   },
-  data() {
+  setup() {
+    const pageNotFound = ref<string>('404 Not Found')
+    const otherError = ref<string>('An error occurred')
     return {
-      pageNotFound: '404 Not Found',
-      otherError: 'An error occurred'
+      pageNotFound,
+      otherError
     }
   }
-}
+})
 </script>
 
 <style scoped>
